@@ -8,7 +8,7 @@ function App() {
     <div className="all">
       <div className="App">
         <header className="App-header">
-          <h1>Ja<a className="purple">mmm</a>ing</h1>
+          <h1>Ja<span className="purple">mmm</span>ing</h1>
         </header>
       </div>
       <SearchBar />

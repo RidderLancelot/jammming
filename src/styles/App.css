@@ -1,0 +1,84 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Times New Roman', Times, serif;  
+}
+
+h1, h2, h3, h4, h5, p {
+  color: white;
+}
+
+body {
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjFBvedj9Ka-tHc4kIV0AjogcXJW_XaYPmBA&s");
+  background-size: 100%;
+}
+
+.SearchField {
+  width: 280px;
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  margin: 40px auto;
+}
+
+.SearchButton {
+  width: 160px;
+  height: 35px;
+  border-radius: 80px;
+  background-color: purple;
+  border-color: purple;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.searchbar {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.App-header {
+  background-color: rgb(68, 22, 68);
+  height: 65px;
+  text-align: center;
+}
+
+
+.App-header h1{
+  padding-top: 10px;
+  font-size: 40px;
+  color: white;
+  opacity: 0.9;
+}
+
+.purple {
+  color: rgb(174, 15, 174);
+}
+
+.SearchResults {
+  text-align: left;
+  width: 40%;
+  background-color: rgba(30, 0, 30, 0.6);
+  margin: 0 30%;
+  padding: 20px;
+}
+
+.Tracklist {
+  margin: 15px 0;
+}
+
+.SongName {
+  font-size: 20px;
+}
+
+.SongInfo {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.Track {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+  padding: 12px 0;
+}

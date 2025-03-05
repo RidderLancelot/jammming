@@ -1,7 +1,7 @@
 * {
   margin: 0px;
   padding: 0px;
-  font-family: 'Times New Roman', Times, serif;  
+  font-family: 'Times New Roman', Times, serif;
 }
 
 h1, h2, h3, h4, h5, p {
@@ -14,41 +14,41 @@ body {
 }
 
 .SearchField {
-  width: 280px;
-  height: 40px;
+  width: 17.5rem;
+  height: 2.5rem;
   text-align: center;
-  font-size: 18px;
-  margin: 40px auto;
+  font-size: 1.125rem;
+  margin: 2.5rem auto;
 }
 
 .SearchButton {
-  width: 160px;
-  height: 35px;
-  border-radius: 80px;
+  width: 16rem;
+  height: 2.1875rem;
+  border-radius: 5rem;
   background-color: purple;
   border-color: purple;
   color: white;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 600;
   opacity: 0.95;
 }
 
 .searchbar {
-  margin-top: 60px;
-  margin-bottom: 60px;
+  margin-top: 3.75rem;
+  margin-bottom: 3.75rem;
   text-align: center;
 }
 
 .App-header {
   background-color: rgb(68, 22, 68);
-  height: 65px;
+  height: 4.0625rem;
   text-align: center;
 }
 
 
 .App-header h1{
-  padding-top: 10px;
-  font-size: 40px;
+  padding-top: 0.625rem;
+  font-size: 2.5rem;
   color: white;
   opacity: 0.9;
 }
@@ -57,28 +57,55 @@ body {
   color: rgb(174, 15, 174);
 }
 
-.SearchResults {
+.SearchResults, .Playlist {
   text-align: left;
-  width: 40%;
-  background-color: rgba(30, 0, 30, 0.6);
-  margin: 0 30%;
-  padding: 20px;
+  width: 35%;
+  background-color: rgba(30, 0, 30, 0.75);
+  margin: 6.25rem 0;
+  padding: 1.125rem;
 }
 
 .Tracklist {
-  margin: 15px 0;
+  margin: 0.9375rem 0;
 }
 
 .SongName {
-  font-size: 20px;
+  font-size: 1.125rem;
 }
 
 .SongInfo {
-  font-size: 16px;
+  font-size: 0.875rem;
   opacity: 0.8;
 }
 
 .Track {
   border-bottom: 2px solid rgba(255, 255, 255, 0.7);
-  padding: 12px 0;
+  padding: 0.5rem 0;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.type {
+  float: right;
+  padding: 0 1.25rem;
+  font-size: 2rem;
+  color: lightslategray;
+}
+
+.type:hover {
+  cursor: pointer;
+  color: red;
+}
+
+@media screen and (max-width: 1080px){
+  .SearchResults, .Playlist {
+    width: 70%;
+    margin: 6.25rem 15%;
+  }
+  .flex {
+    display: contents;
+  }
 }

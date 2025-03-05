@@ -1,4 +1,4 @@
-import Track from "./Track";
+/*import Track from "./Track";
 
 // Authorization token that must have been created previously. See : https://developer.spotify.com/documentation/web-api/concepts/authorization
 const token = 'BQCTzNaUdkvE4vo6uDzanvJ2ZKqu5QTB3nwDgzNich58LJI6udsD3d4iypQZ7d2G0nMokY7Beoc9ha2maHv0Zox276f2Sf9FPKWBU2mRVvKFW98W7sNQJUr9dmLh6Vw6fvpP0hTZwX5mCmu_ygT8kVi7pWrFFOwBKO500aiBpGwowcrWRSBbaFadukh9ran0CqxjKl-hiNieanv5Okrzm9HheERYq2AISZ1eK_A7r847A6URpR9AxTIYwT_8bqox4Qxxix8AGicuubDwJG8Cp-jVKNrepa00RwfYPNCd16g6VaoR1OerlBWK';
@@ -30,4 +30,4 @@ function TopTracks() {
 }
 
 
-export default TopTracks;
+export default TopTracks;*/

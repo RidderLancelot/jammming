@@ -12,10 +12,11 @@ function App() {
         </header>
       </div>
       <SearchBar />
-      <SearchResults />
-      <div className="Playlist">
+      <div className='flex'>
+        <SearchResults />
         <Playlist />
       </div>
+      <p>Jeg vil gerne have en knap, hvor man kan se mine mest lyttede sange+kunstnere i hver måned(5)+år(10)</p>
     </div>
   );
 }

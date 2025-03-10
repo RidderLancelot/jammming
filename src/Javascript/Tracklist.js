@@ -3,7 +3,7 @@ import { useState } from "react";
 const type = true;
 
 function Tracklist( {onAddTrack} ) {
-  const [tracks, setTracks] = useState([
+  const [tracks] = useState([
     { name: "bad ones", artists: ["Tate Mcrae"], album: "Too Young to Be Sad", id: "6CYT0souHUHKTO4EMzTUFg" },
     { name: "slower", artists: ["Tate Mcrae"], album: "Too Young to Be Sad", id: "4X3Br7EVc8oy44zUwU1z5w" },
     { name: "you broke me first", artists: ["Tate Mcrae"], album: "Too Young to Be Sad", id: "4l0RmWt52FxpVxMNni6i63" },
@@ -12,6 +12,8 @@ function Tracklist( {onAddTrack} ) {
     { name: "wish i loved you in the 90s", artists: ["Tate Mcrae"], album: "Too Young to Be Sad", id: "2wkIdVB8HsWyMur3Q4shlZ" }
   ]);
 
+
+  
   return (
     <div className="Tracklist">
       {tracks.map((track, index) => (
@@ -27,6 +29,7 @@ function Tracklist( {onAddTrack} ) {
     </div>
   );
 }
+
 
 
 export default (Tracklist);

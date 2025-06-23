@@ -3,7 +3,7 @@
 
 const clientId = 'de8c5edcc39e4f3da974e2e22fe51915';
 const redirectUri = window.location.origin; // Redirects back to your app
-const scopes = 'playlist-modify-private playlist-modify-public user-read-private user-read-email';
+const scopes = 'playlist-modify-private playlist-modify-public user-read-private user-read-email playlist-read-private playlist-read-collaborative';
 
 let accessToken = '';
 

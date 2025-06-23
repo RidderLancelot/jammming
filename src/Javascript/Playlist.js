@@ -1,4 +1,3 @@
-import { useState } from 'react';
 const type = false;
 
 function Playlist( { playlist, onRemoveTrack, playlistName, handlePlaylistNameChange, onSavePlaylist } ) {

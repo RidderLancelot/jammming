@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAccessToken } from './Spotify';
+import { getAccessToken, getCurrentUserId } from './Spotify';
 
 function Playlists() {
   const [playlists, setPlaylists] = useState([]);
@@ -20,23 +20,32 @@ function Playlists() {
   const TRACKS_PER_PAGE = 100;
 
   useEffect(() => {
-    async function fetchPlaylists() {
+    async function fetchUserAndPlaylists() {
       try {
         const token = getAccessToken();
         if (!token) throw new Error('No access token');
-        const response = await fetch('https://api.spotify.com/v1/me/playlists', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (!response.ok) throw new Error('Failed to load playlists');
-        const data = await response.json();
-        setPlaylists(data.items || []);
+        const uid = await getCurrentUserId();
+        let allPlaylists = [];
+        let url = 'https://api.spotify.com/v1/me/playlists?limit=50';
+        while (url) {
+          const response = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (!response.ok) throw new Error('Failed to load playlists');
+          const data = await response.json();
+          allPlaylists = allPlaylists.concat(data.items || []);
+          url = data.next;
+        }
+        // Only show playlists owned by the user
+        const ownedPlaylists = allPlaylists.filter(p => p.owner && p.owner.id === uid);
+        setPlaylists(ownedPlaylists);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     }
-    fetchPlaylists();
+    fetchUserAndPlaylists();
   }, []);
 
   // Only fetch one page at a time for display
@@ -60,19 +69,6 @@ function Playlists() {
       const { items, total } = await fetchTracksPage(playlist.id, 0);
       setTracks(items);
       setTotalTracks(total);
-    } finally {
-      setTracksLoading(false);
-    }
-  }
-
-  // Pagination controls
-  async function goToPage(page) {
-    if (!selected) return;
-    setTracksLoading(true);
-    setTrackPage(page);
-    try {
-      const { items } = await fetchTracksPage(selected.id, page);
-      setTracks(items);
     } finally {
       setTracksLoading(false);
     }
@@ -105,9 +101,9 @@ function Playlists() {
     }
     const dups = Object.entries(count)
       .filter(([_, c]) => c > 1)
-      .map(([id, c]) => {
-        const track = allTracks.find(item => item.track?.id === id)?.track;
-        return { id, name: track?.name, count: c };
+      .map(([_, c]) => {
+        const track = allTracks.find(item => item.track?.id === _ )?.track;
+        return { id: _, name: track?.name, count: c };
       });
     setDuplicates(dups);
     setChecked(true);
@@ -132,13 +128,13 @@ function Playlists() {
       // Find duplicates and their positions
       const seen = new Map(); // id -> [positions]
       allTracks.forEach((item, idx) => {
-        const id = item.track?.id;
-        if (!id) return;
-        if (!seen.has(id)) seen.set(id, []);
-        seen.get(id).push(idx);
+        const trackId = item.track?.id;
+        if (!trackId) return;
+        if (!seen.has(trackId)) seen.set(trackId, []);
+        seen.get(trackId).push(idx);
       });
       // For each duplicate, remove all by URI, then re-add one at the first occurrence
-      for (const [id, positions] of seen.entries()) {
+      for (const [, positions] of seen.entries()) {
         if (positions.length > 1) {
           const uri = allTracks[positions[0]].track.uri;
           // Remove all occurrences by URI
@@ -223,6 +219,7 @@ function Playlists() {
                     <div style={{background:'#eafbe7',color:'#1a7f37',padding:'0.7rem 1.2rem',borderRadius:10,fontWeight:'bold',boxShadow:'0 2px 8px #eafbe7'}}>No duplicates</div>
                   )}
                 </div>
+                {/* Always show pagination and tracks, even before duplicate check/fix */}
                 {tracksLoading ? <p>Loading tracks...</p> : (
                   <>
                     <ul style={{listStyle:'none', padding:0, maxHeight: '350px', overflowY: 'auto'}}>

@@ -1,15 +1,17 @@
+import { useState } from 'react';
 const type = false;
 
-function Playlist( { playlist, onRemoveTrack, playlistName, handlePlaylistNameChange} ) {
+function Playlist( { playlist, onRemoveTrack, playlistName, handlePlaylistNameChange, onSavePlaylist } ) {
   function givInformation(e) {
-    alert (
-      "Playlisten: " + playlistName + ", har sangene: " + playlist.map((track) => (track.name)).join(', ')
-    );
+    e.preventDefault();
+    if (onSavePlaylist) {
+      onSavePlaylist();
+    }
   }
 
   return (
     <div className="Playlist">
-      <form>
+      <form onSubmit={givInformation}>
         <input onChange={handlePlaylistNameChange} type="text" name="save-to-spotify" placeholder={playlistName} className="PlaylistName"></input>
         <div className="Tracklist">
           {playlist.map((track) => (
@@ -23,13 +25,10 @@ function Playlist( { playlist, onRemoveTrack, playlistName, handlePlaylistNameCh
             </div>
           ))}
         </div>
-        <button className="saveToSpotify" onClick={givInformation}>SAVE TO SPOTIFY</button>
+        <button className="saveToSpotify" type="submit">SAVE TO SPOTIFY</button>
       </form>
     </div>
   );
 }
 
-
-
-
-export default (Playlist) ;
+export default Playlist;

@@ -20,8 +20,35 @@ h1, h2, h3, h4, h5, p {
 }
 
 body {
-  background-image: url("../Photos/background-img.jpeg");
-  background-size: 100%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  animation: gradientBG 15s ease infinite;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* Polygon pattern overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  background-image: url('https://www.transparenttextures.com/patterns/geometry2.png');
+  background-size: 300px 300px;
+  background-repeat: repeat;
+  background-position: center;
+  mix-blend-mode: lighten;
 }
 
 .SearchField {
@@ -45,8 +72,8 @@ body {
 }
 
 .searchbar {
-  margin-top: 3.75rem;
-  margin-bottom: 3.75rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   text-align: center;
 }
 
@@ -69,8 +96,8 @@ body {
 .SearchResults, .Playlist {
   text-align: left;
   background-color: rgba(30, 0, 30, 0.75);
-  margin: 6.25rem 0;
-  padding: 1.125rem;
+  margin: 0.5rem 0;
+  padding: 1rem;
 }
 
 .SearchResults {
@@ -107,6 +134,8 @@ body {
 .flex {
   display: flex;
   justify-content: space-evenly;
+  gap: 2rem;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .type {

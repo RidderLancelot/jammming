@@ -92,7 +92,6 @@ export default function Top() {
                     role="tab"
                     className={opt.value === category ? 'seg-btn active' : 'seg-btn'}
                     aria-selected={opt.value === category}
-                    aria-pressed={opt.value === category}
                     onClick={() => setCategory(opt.value)}
                   >
                     {opt.label}
@@ -130,7 +129,6 @@ export default function Top() {
                     role="tab"
                     className={opt.value === timeRange ? 'seg-btn active' : 'seg-btn'}
                     aria-selected={opt.value === timeRange}
-                    aria-pressed={opt.value === timeRange}
                     onClick={() => setTimeRange(opt.value)}
                   >
                     {opt.label}

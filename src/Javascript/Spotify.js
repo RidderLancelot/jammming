@@ -3,7 +3,7 @@
 
 const clientId = 'de8c5edcc39e4f3da974e2e22fe51915';
 const redirectUri = window.location.origin; // Redirects back to your app
-const scopes = 'playlist-modify-private playlist-modify-public user-read-private user-read-email playlist-read-private playlist-read-collaborative';
+const scopes = 'playlist-modify-private playlist-modify-public user-read-private user-read-email playlist-read-private playlist-read-collaborative user-top-read';
 
 let accessToken = '';
 
@@ -99,4 +99,49 @@ export async function savePlaylistToSpotify(playlistName, uris) {
   const playlistId = await createPlaylist(userId, playlistName);
   await addTracksToPlaylist(playlistId, uris);
   return playlistId;
+}
+
+// New: Top content helpers
+export async function getTopArtists(limit = 10, timeRange = 'long_term') {
+  const token = getAccessToken();
+  const res = await fetch(`https://api.spotify.com/v1/me/top/artists?time_range=${encodeURIComponent(timeRange)}&limit=${limit}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Failed to fetch top artists');
+  const data = await res.json();
+  return data.items || [];
+}
+
+export async function getTopTracks(limit = 10, timeRange = 'long_term') {
+  const token = getAccessToken();
+  const res = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${encodeURIComponent(timeRange)}&limit=${limit}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Failed to fetch top tracks');
+  const data = await res.json();
+  return data.items || [];
+}
+
+// Derive top albums from the user's top tracks within a time range
+export async function getTopAlbums(limit = 10, timeRange = 'long_term') {
+  const token = getAccessToken();
+  // fetch more tracks to get better album distribution
+  const res = await fetch(`https://api.spotify.com/v1/me/top/tracks?time_range=${encodeURIComponent(timeRange)}&limit=50`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) throw new Error('Failed to fetch top tracks for albums');
+  const data = await res.json();
+  const items = data.items || [];
+  // Count album occurrences
+  const counts = new Map();
+  for (const t of items) {
+    const alb = t.album;
+    if (!alb) continue;
+    const key = alb.id;
+    const current = counts.get(key) || { album: alb, count: 0 };
+    current.count += 1;
+    counts.set(key, current);
+  }
+  const sorted = Array.from(counts.values()).sort((a, b) => b.count - a.count).slice(0, limit).map(x => x.album);
+  return sorted;
 }

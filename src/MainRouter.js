@@ -1,7 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, Link, NavLink } from 'react-router-dom';
 import Playlists from './Javascript/Playlists';
 import App from './Javascript/App';
 import AuthWrapper from './AuthWrapper';
+import Top from './Javascript/Top';
 
 function MainRouter() {
   return (
@@ -11,6 +12,7 @@ function MainRouter() {
           <Route path="/home" element={<AppWithNav />} />
           <Route path="/jammming" element={<AppWithNav />} />
           <Route path="/playlists" element={<PlaylistsWithNav />} />
+          <Route path="/top" element={<TopWithNav />} />
           <Route path="/" element={<Navigate to="/home" replace />} />
         </Routes>
       </AuthWrapper>
@@ -18,17 +20,26 @@ function MainRouter() {
   );
 }
 
+function HeaderBar() {
+  return (
+    <header className="App-header">
+      <div className="header-inner">
+        <Link to="/home" className="brand">
+          Ja<span className="purple">mmm</span>ing
+        </Link>
+        <nav className="nav-links">
+          <NavLink to="/playlists" className={({isActive}) => `nav-link${isActive ? ' active' : ''}`}>Playlists</NavLink>
+          <NavLink to="/top" className={({isActive}) => `nav-link${isActive ? ' active' : ''}`}>Top 50</NavLink>
+        </nav>
+      </div>
+    </header>
+  );
+}
+
 function AppWithNav() {
   return (
     <>
-      <header className="App-header" style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 2rem',background:'rgb(68, 22, 68)',borderBottom:'1px solid #eee',height:'4.0625rem'}}>
-        <Link to="/home" style={{margin:0, color:'white', fontSize:'2.5rem', opacity:0.9, textDecoration:'none', fontWeight:'bold'}}>
-          Ja<span className="purple">mmm</span>ing
-        </Link>
-        <nav>
-          <Link to="/playlists" style={{textDecoration: 'none', color: '#fff', fontWeight:'bold'}}>Playlists</Link>
-        </nav>
-      </header>
+      <HeaderBar />
       <App />
     </>
   );
@@ -37,15 +48,17 @@ function AppWithNav() {
 function PlaylistsWithNav() {
   return (
     <>
-      <header className="App-header" style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 2rem',background:'rgb(68, 22, 68)',borderBottom:'1px solid #eee',height:'4.0625rem'}}>
-        <Link to="/home" style={{margin:0, color:'white', fontSize:'2.5rem', opacity:0.9, textDecoration:'none', fontWeight:'bold'}}>
-          Ja<span className="purple">mmm</span>ing
-        </Link>
-        <nav>
-          <Link to="/playlists" style={{textDecoration: 'none', color: '#fff', fontWeight:'bold'}}>Playlists</Link>
-        </nav>
-      </header>
+      <HeaderBar />
       <Playlists />
+    </>
+  );
+}
+
+function TopWithNav() {
+  return (
+    <>
+      <HeaderBar />
+      <Top />
     </>
   );
 }

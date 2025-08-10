@@ -150,6 +150,133 @@ body::before {
   color: red;
 }
 
+/* Top page styles */
+.top-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(68,22,68,0.12);
+  padding: 1.5rem;
+}
+.top-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 0.5rem;
+}
+
+/* New: actions container for controls */
+.top-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.top-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.top-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: #faf7ff;
+  border: 1px solid #eee;
+  box-shadow: 0 1px 8px rgba(68,22,68,0.06);
+}
+.top-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgb(68, 22, 68);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.top-img { object-fit: cover; background: #eee; }
+.top-img.round { border-radius: 50%; }
+.top-img.square { border-radius: 8px; }
+
+/* Controls */
+.control { display: flex; align-items: center; gap: 8px; }
+.control-label { color: #666; font-weight: 500; }
+.control-select { padding: 0.4rem 0.6rem; border-radius: 8px; border: 1px solid #ddd; background: #fff; color: #333; }
+
+/* Segmented control for mobile */
+.segmented {
+  display: inline-flex;
+  background: #f1ecfb;
+  border: 1px solid #e1d7f8;
+  border-radius: 999px;
+  padding: 2px;
+  flex-wrap: wrap;
+  row-gap: 6px;
+}
+.seg-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #542a7d;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.seg-btn.active {
+  background: #6f3aad;
+  color: #fff;
+  box-shadow: 0 1px 4px rgba(68,22,68,0.25);
+}
+
+/* Show/hide controls per breakpoint */
+.only-mobile { display: none; }
+.only-desktop { display: block; }
+
+/* Duplicates grid in Playlists */
+.dup-grid {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+  .top-container {
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  .top-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+  .top-card { padding: 0.6rem; }
+  .top-rank { width: 28px; height: 28px; font-size: 0.9rem; }
+  .top-img { width: 48px; height: 48px; }
+  .dup-grid { grid-template-columns: 1fr; }
+
+  .only-mobile { display: block; }
+  .only-desktop { display: none; }
+  .top-controls { align-items: flex-start; }
+  .top-actions { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
+  .control { justify-content: space-between; }
+  .segmented { width: 100%; justify-content: space-between; }
+}
+
+/* Tablet/Desktop responsive adjustments */
 @media screen and (max-width: 1080px){
   .SearchResults, .Playlist {
     width: 70%;
